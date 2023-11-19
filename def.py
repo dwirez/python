@@ -20,14 +20,16 @@ def Login(existing_user):
             print("Nama Pengguna atau sandi salah")
 
 
-putusan = input("login or sign in : ")
+putusan = input("login or sign up : ")
 existing_user = {"dwiki" : "456"}
 
-while putusan != "login" and putusan != "sign in":
+while putusan != "login" and putusan != "sign up":
     putusan = input(f"Salah input\nMasukan lagi Login or sign in : ")
 
-if putusan == "sign in" :
+if putusan == "sign up" :
     user_data = buatakun()
+    existing_user.update(user_data)
+    Login(existing_user)
 
 if putusan == "login":
     Login(existing_user)
