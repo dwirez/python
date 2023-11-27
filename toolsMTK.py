@@ -19,7 +19,7 @@ def volume_tabung(jari,tinggi):
 
 #FUNGSI KELILING TABUNG 
 def keliling_tabung(jari,tinggi):
-    keliling = 2*3.14*jari*tinggi
+    keliling = 2*3.14*jari
     return keliling
 
 # FUNGSI OPERASI MATEMATIKA
@@ -46,11 +46,60 @@ def urutan_list(inputan_list,descending=True) :
 
     return list_terurut
 
-# FUNGSI 
+# FUNGSI Rata Rata Nilai Ulangan Harian, UTS dan Nilai UAS
+def total_nilai(nilai_harian,nilai_uts,nilai_uas) :
+    total_nilai_mahasiswa = int(nilai_harian)+int(nilai_uts)+int(nilai_uas)
+    return total_nilai_mahasiswa
+
+def banyak_ujian(jumlah_data):
+    banyak_ujian_mahasiswa = 0
+    for i in range(1, jumlah_data + 1):
+        print("--------Nilai Ke ", i, "--------")
+        nilai_harian = int(input("Masukan Nilai Harian : "))
+        nilai_uts = int(input("Masukan Nilai UTS : "))
+        nilai_uas = int(input("Masukan Nilai UAS : "))
+
+        banyak_ujian_mahasiswa += total_nilai(nilai_harian,nilai_uts,nilai_uas)
+
+    return banyak_ujian_mahasiswa / jumlah_data
+
+# FUNGSI Deret Fibbonanci(Rekursif)
+def Fibbonanci(n):
+    if n < 1:
+        return[n]
+
+    list_sebelum_N = Fibbonanci(n - 1)
+    angka1 = list_sebelum_N[-2] if len(list_sebelum_N) > 2 else 0
+    angka2 = list_sebelum_N[-1] if len(list_sebelum_N) > 2 else 1
+
+    return list_sebelum_N + [angka1 + angka2]
+
+# FUNGSI Mencari nilai MAX dan MIN dengan metode rekursif
+def nilai_maksimal (list):
+    nilai_terbesar = list[0]
+
+    if len(list) > 1:
+        lanjut_nilai_terbesar = nilai_maksimal(list[1:])
+
+        if lanjut_nilai_terbesar > nilai_terbesar :
+            nilai_terbesar = lanjut_nilai_terbesar
+
+    return nilai_terbesar
+
+def nilai_minimal (list):
+    nilai_terkecil = list[0]
+
+    if len(list) > 1:
+        lanjut_nilai_terkecil = nilai_minimal(list[1:])
+        
+        if lanjut_nilai_terkecil < nilai_terkecil :
+            nilai_terkecil = lanjut_nilai_terkecil
+    
+    return nilai_terkecil
 
 # MEMANGGIL FUNGSI
 print("="*4, "TOOLS MTK", "="*4)
-print("1.Hitung VOLUME dan KELILING Tabung\n2.Hitung Operasi MATEMATIKA\n3.Mengetahui bilangan Ganjil atau genap\n4.Mengurutkan list bertipe data double ")
+print("1.Hitung VOLUME dan KELILING Tabung\n2.Hitung Operasi MATEMATIKA\n3.Mengetahui bilangan Ganjil atau genap\n4.Mengurutkan list bertipe data double \n5.Hitung rata-rata nilai Mahasiswa\n6.Deret Fibbonanci dengan rekursif\n7.Mencari Nilai Maksimal dan Minimal dengan rekursif")
 print()
 userchoice = int(input("Masukan sesai Nomor Program : "))
 if userchoice == 1 :
@@ -80,18 +129,19 @@ elif userchoice == 2 :
         print("="*4,"Operasi Kali","="*4)
         a,b,c,d = Operasi_MTK(angka1,angka2)
         print(f"Hasil dari Operasi perkalian dari {angka1} dan {angka2} adalah = {c}")
-    elif opchoice == 3 :
+    elif opchoice == 4 :
         print("="*4,"Operasi Bagi","="*4)
         a,b,c,d = Operasi_MTK(angka1,angka2)
         print(f"Hasil dari Operasi Pemabagian dari {angka1} dan {angka2} adalah = {d}")
     else : 
         print("Kamu Salah Memasukan Angka")
-        opchoice = int(input("Masukan Lagi : "))
 elif userchoice == 3 :
     print("="*4,"Program Mengetahui bilangan GANJIL atau GENAP ","="*4)
     bil = int(input("Masukan Bilangan : "))
     print(f"Bilangan adalah {ganjilgenap(bil)}")
 elif userchoice == 4 :
+    print("="*4,"Mengurutkan List data double dari terbesar ke terkecil atau sebaliknya ","="*4)
+
     urutan = []
     n = int(input("Masukan berapa angka yang ingin berada di dalam list"))
     for i in range(n):
@@ -103,6 +153,47 @@ elif userchoice == 4 :
 
     print("Urutan dari besar ke kecil:", besarkekecil)
     print("Urutan dari kecil ke besar:", kecilkebesar)
+
+elif userchoice == 5 :
+    print("="*4,"Menghitung Rata Rata Nilai Mahasiswa ","="*4)
+    jumlah_data = int(input("berapa ujian yang akan di rata rata : "))
+    hasil_ujian = banyak_ujian(jumlah_data)
+    print("jadi rata - rata nilai yang didapat adalah : ", hasil_ujian)
+
+elif userchoice == 6 :
+    print("="*4,"Deret Fibbonanci dengan rekursif ","="*4)
+    print()
+    panjang = int(input("Masukan Panjang Deret : "))
+    print(Fibbonanci(panjang - 1))
+
+elif userchoice == 7 :
+    print("="*4,"Mencari Nilai MAX dan MIN dengan metode Rekursif ","="*4)
+    pilih = (int(input("1. Mencari Nilai Maximal\n2. Mencari Nilai Minimal\nMasukan Nomor Program : ")))
+    if pilih == 1 :
+        a = []
+        banyakvalue = (int(input("Masukan Berapa jumlah nilai yang ingin kamu masukan ; ")))
+        for i in range(0, banyakvalue):
+            angka = int(input(f"Masukan angka ke {i+1} :"))
+            a.append(angka)
+        print("Angka didalam list adalah",a)
+        print("angka Maksimalnya adalah =", nilai_maksimal(a))
+    elif pilih == 2 :
+        a = []
+        banyakvalue = (int(input("Masukan Berapa nilai yang ingin kamu masukan ; ")))
+        for i in range(0, banyakvalue):
+            angka = int(input(f"Masukan angka ke {i+1} : "))
+            a.append(angka)
+        print("Angka didalam list adalah",a)
+        print("angka Minimalnya adalah =", nilai_minimal(a))
+    else :
+        print("Salah input")
+
+
+
+
+    
+
+
 
 
 
